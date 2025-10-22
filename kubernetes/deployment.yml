@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react-app-deployment
-  labels:
-    app: react-app
 spec:
   replicas: 3
   selector:
@@ -15,18 +13,11 @@ spec:
         app: react-app
     spec:
       containers:
-        - name: react-app
-          image: muneebdock12/kubernetes-app:latest
-          ports:
-            - containerPort: 3000
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "250m"
-              memory: "256Mi"
-          imagePullPolicy: Always
+      - name: react-app
+        image: muneebdock12/kubernetes-app:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -37,6 +28,6 @@ spec:
   selector:
     app: react-app
   ports:
-    - port: 3000
-      targetPort: 3000
-      nodePort: 30080
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
