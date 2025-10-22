@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react-app-deployment
-  namespace: default
   labels:
     app: react-app
 spec:
